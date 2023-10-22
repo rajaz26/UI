@@ -8,6 +8,7 @@ import Stats from './Stats';
 import Profile from './Profile';
 import Scan from './Scan';
 import { Text, View } from 'react-native';
+import SettingsScreen from './SettingsScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -31,7 +32,7 @@ const Dashboard = () => {
   return (
     <Tab.Navigator screenOptions={screenOptions} initialRouteName="DashboardHome" >
       <Tab.Screen
-        name="DashboardHome" // Renamed the initial route
+        name="DashboardHome" 
         component={HomeScreen2}
         options={{
           tabBarIcon: ({ focused }) => {
@@ -93,14 +94,14 @@ const Dashboard = () => {
         }}
       />
       <Tab.Screen
-        name="Stats"
-        component={Stats}
+        name="Settings"
+        component={SettingsScreen}
         options={{
           tabBarIcon: ({ focused }) => {
             return (
               <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                 <Ionic
-                  name={focused ? 'stats-chart' : 'stats-chart-outline'}
+                  name={focused ? 'settings' : 'settings-outline'}
                   size={24}
                   color={focused ? COLORS.primary : '#111'}
                 />

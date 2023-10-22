@@ -1,13 +1,29 @@
 import { StyleSheet, Text, TouchableOpacity, View,Image, TextInput} from 'react-native'
-import React from 'react'
+import React,{ useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionic from 'react-native-vector-icons/Ionicons';
 import { COLORS } from '../assets/theme/index.js';
 import Animated, { FadeIn, FadeInDown, FadeInUp } from 'react-native-reanimated';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
+import { setRole } from '../store/useReducer.js'
 
 const LoginScreen = () => {
+  const dispatch = useDispatch();
   const navigation=useNavigation();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = (role) => {
+    if (role === 'Cashier' || role === 'Warehouse' || role === 'General Manager' || role === 'Purchaser') {
+      dispatch(setRole(role));
+      navigation.navigate("Home");
+    } else {
+      // Handle the case where the role is not one of the specified roles
+      // You can show an error message or perform any other required actions.
+    }
+  };
+
   return (
     <View style={styles.container}>
       <SafeAreaView style={{flex:1,marginTop:10}}>
@@ -24,13 +40,22 @@ const LoginScreen = () => {
       <Animated.View style={styles.formContainer} entering={FadeInDown.duration(1000).springify()} > 
        <View style={styles.form}>
         <Text style={styles.formText}>Email Address</Text>
-        <TextInput style={styles.formInput}/>
+        <TextInput
+            style={styles.formInput}
+            onChangeText={(text) => setEmail(text)}
+            value={email}
+          />
         <Text style={styles.formText}>Password</Text>
-        <TextInput secureTextEntry style={[styles.formInput, styles.passwordInput]} />
+        <TextInput
+            secureTextEntry
+            style={[styles.formInput, styles.passwordInput]}
+            onChangeText={(text) => setPassword(text)}
+            value={password}
+          />
         <Text style={styles.forgetText}>Forget Password ?</Text>
        </View>
        <View style={styles.loginButtonContainer}>
-       <TouchableOpacity style={styles.loginButton}>
+       <TouchableOpacity style={styles.loginButton} onPress={() => handleLogin(email)}>
         <Text style={styles.loginText}>Login</Text>
        </TouchableOpacity>
        </View >
@@ -163,3 +188,4 @@ noAccountContainer:{
   justifyContent:'center',
 }
 })
+

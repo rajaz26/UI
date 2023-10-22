@@ -8,18 +8,21 @@ import Profile from './Profile';
 import Scan from './Scan';
 import { COLORS } from '../assets/theme';
 import { StyleSheet, View, TouchableWithoutFeedback } from 'react-native';
-
+import SettingsScreen from './SettingsScreen';
+import { useSelector } from 'react-redux'; 
 const Tab = createMaterialTopTabNavigator();
+
 
 const tabIcons = {
   Dashboard: 'home',
   History: 'archive',
   Scan: 'scan',
-  Stats: 'stats-chart',
+  Settings: 'settings',
   Profile: 'person',
 };
 
 const CustomTabBar = ({ state, descriptors, navigation }) => {
+  const userRole = useSelector((state) => state.user.role);
   return (
     <View style={{ flexDirection: 'row', justifyContent: 'space-between' ,backgroundColor:'white',borderTopWidth:1,borderTopColor:'lightgray'}}>
       {state.routes.map((route, index) => {
@@ -45,7 +48,7 @@ const CustomTabBar = ({ state, descriptors, navigation }) => {
                 alignItems: 'center',
                 padding: 20,
                 backgroundColor: isScanTab ? COLORS.primary : 'white',
-                borderRadius: isScanTab ? 100 : 0, // To make it round for Scan tab
+                borderRadius: isScanTab ? 100 : 0, 
                 bottom:isScanTab ? 20 : 0,
               }}
             >
@@ -75,7 +78,7 @@ const TopTabNavigator = () => {
       <Tab.Screen name="Dashboard" component={HomeScreen2} />
       <Tab.Screen name="History" component={History} />
       <Tab.Screen name="Scan" component={Scan} />
-      <Tab.Screen name="Stats" component={Stats} />
+      <Tab.Screen name="Settings" component={SettingsScreen} />
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );

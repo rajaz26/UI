@@ -22,6 +22,9 @@ import CustomDrawer from '../components/Drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import HomeScreen2 from '../screens/HomeScreen2';
 import TopTabNavigator from '../screens/TopTabNavigator';
+import UploadPurchase from '../screens/UploadPurchase';
+import PurchaseHistory from '../screens/PurchaseHistory';
+import Notifications from '../screens/Notifications';
 
 const Drawer = createDrawerNavigator();
 
@@ -46,6 +49,9 @@ const appnavigation = () => {
       <Drawer.Screen name="Stats" component={Stats} />
       <Drawer.Screen name="Product" component={Product} />
       <Drawer.Screen name="Scan" component={Scan} />
+      <Drawer.Screen name="Upload" component={UploadPurchase} />
+      <Drawer.Screen name="Notifications" component={Notifications} />
+      <Drawer.Screen name="PurchaseHistory" component={PurchaseHistory} />
       <Drawer.Screen name="Home" component={TopTabNavigator} />
     </Drawer.Navigator>
   );
